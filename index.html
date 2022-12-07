@@ -1,50 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <link rel="stylesheet" href="styles.css">
   <title>Frontend Mentor | Interactive card details form</title>
 
+  <script defer src="./index.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+
   <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
   </style>
 </head>
+
 <body>
+  <div class="layout">
+    <div class="area">
+      <img src="images/bg-main-desktop.png" id="main" alt="background">
+      <div class="money">
+        <div class="card-front">
+          <img src="images/bg-card-front.png" id="front" alt="front">
+          <div class="code">
+            <svg width="84" height="47" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="23.478" cy="23.5" rx="23.478" ry="23.5" fill="#fff" />
+              <path
+                d="M83.5 23.5c0 5.565-4.507 10.075-10.065 10.075-5.559 0-10.065-4.51-10.065-10.075 0-5.565 4.506-10.075 10.065-10.075 5.558 0 10.065 4.51 10.065 10.075Z"
+                stroke="#fff" />
+            </svg>
+            <p id="card_number">0000 0000 0000 0000</p>
 
-  0000 0000 0000 0000
-  Jane Appleseed
-  00/00
+            <div id="information">
+              <li id="card_name">Jane Appleseed</li>
+              <li id="card_date">
+                <em id="card_date_month">00</em>/<em id="card_date_year">00</em>
+              </li>
+            </div>
+          </div>
+        </div>
 
-  000
+        <div class="card-back">
+          <img src="images/bg-card-back.png" id="back" alt="back">
+          <p id="card_cvc">000</p>
+        </div>
+      </div>
+    </div>
 
-  Cardholder Name
-  e.g. Jane Appleseed
+    <form id="form" novalidate>
+      <div class="container">
+        <div class="field">
+          <label for="name">Cardholder Name</label>
+          <input id="name" type="text" placeholder="e.g. Jane Appleseed" name="name" required>
+          <div class="error"></div>
+        </div>
 
-  Card Number
-  e.g. 1234 5678 9123 0000
+        <div class="field">
+          <label for="number">Card Number</label>
+          <input id="number" placeholder="e.g. 1234 5678 9123 0000" name="number" required>
+          <div class="error"></div>
+        </div>
 
-  Exp. Date (MM/YY)
-  MM
-  YY
+        <div class="field" id="exp">
+          <div class="expare">
+            <label form="number">Exp. Date (MM/YY)</label>
+            <div id="numy">
+              <input id="date_1" type="number" placeholder="MM" name="date">
+              <input id="date_2" placeholder="YY" name="date" required>
+            </div>
+            <div class="error"></div>
+          </div>
 
-  CVC
-  e.g. 123
+          <div class="cvc">
+            <label form="cvc">CVC</label>
+            <input id="cvc" type="number" placeholder="e.g. 123" name="cvc" required></input>
+          </div>
+          <div class="error"></div>
+        </div>
 
-  Confirm
-
-  <!-- Completed state start -->
-
-  Thank you!
-  We've added your card details
-  Continue
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+        <button type="submit" class="confirm">Confirm</button>
+      </div>
+    </form>
   </div>
+  <!-- Thank you!
+  We've added your card details
+  Continue  -->
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>
+  </div>
+
 </body>
+
 </html>
