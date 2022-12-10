@@ -57,47 +57,69 @@
     </div>
 
     <form id="form" novalidate>
-      <div class="container">
+      <div class="container" id="container">
         <div class="field">
           <label for="name">Cardholder Name</label>
           <input id="name" type="text" placeholder="e.g. Jane Appleseed" name="name" required>
-          <div class="error"></div>
+          <div class="error">&nbsp;</div>
         </div>
 
         <div class="field">
           <label for="number">Card Number</label>
           <input id="number" placeholder="e.g. 1234 5678 9123 0000" name="number" required>
-          <div class="error"></div>
+          <div class="error">&nbsp;</div>
         </div>
 
-        <div class="field" id="exp">
-          <div class="expare">
-            <label form="number">Exp. Date (MM/YY)</label>
-            <div id="numy">
-              <input id="date_1" type="number" placeholder="MM" name="date">
-              <input id="date_2" placeholder="YY" name="date" required>
+        <div class="row">
+          <div class="field" id="exp">
+            <div class="expare">
+              <label form="number">Exp. Date (MM/YY)</label>
+              <div id="numy">
+                <div class="wrapper">
+                  <input id="date_1" placeholder="MM" name="date">
+                </div>
+                <div class="wrapper">
+                  <input id="date_2" placeholder="YY" name="date" required>
+                </div>
+              </div>
+              <div class="error">&nbsp;</div>
             </div>
-            <div class="error"></div>
           </div>
 
-          <div class="cvc">
+          <div class="cvc field">
             <label form="cvc">CVC</label>
-            <input id="cvc" type="number" placeholder="e.g. 123" name="cvc" required></input>
+            <div id="numy">
+              <input id="cvc" type="number" placeholder="e.g. 123" name="cvc" required></input>
+              <div class="error">&nbsp;</div>
+            </div>
           </div>
-          <div class="error"></div>
         </div>
 
         <button type="submit" class="confirm">Confirm</button>
       </div>
+      <div class="hidden" id="done">
+        <div class='thanks'>
+          <svg width='80' height='80' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <circle cx='40' cy='40' r='40' fill='url(#a)' />
+            <path d='M28 39.92 36.08 48l16-16' stroke='#fff' stroke-width='3' />
+            <defs>
+              <linearGradient id='a' x1='-23.014' y1='11.507' x2='0' y2='91.507' gradientUnits='userSpaceOnUse'>
+                <stop stop-color='#6348FE' />
+                <stop offset='1' stop-color='#610595' />
+              </linearGradient>
+            </defs>
+          </svg>
+          <h1>Thank you!</h1>
+          <p> We've added your card details </p> <button id='continue'> Continue </button>
+        </div>
+      </div>
     </form>
   </div>
-  <!-- Thank you!
-  We've added your card details
-  Continue  -->
+
+
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>
   </div>
-
 </body>
 
 </html>

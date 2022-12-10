@@ -9,11 +9,20 @@ const cardName = document.getElementById('card_name');
 const cardNumber = document.getElementById('card_number');
 const cardMonth = document.getElementById('card_date_month');
 const cardYear = document.getElementById('card_date_year');
+const cardCvc = document.getElementById('card_cvc');
+const cardButton = document.getElementById('continue');
 
-onTyping(name, cardName, 'Jane Appleseed', 1024, (value) => value);
-onTyping(number, cardNumber, '0000000000000000', 16, (value) => value);
+cardButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  window.location.reload();
+});
+
+const identity = (value) => value;
+onTyping(name, cardName, 'Jane Appleseed', 1024, identity);
+onTyping(number, cardNumber, '0000000000000000', 16, identity);
 onTyping(date_1, cardMonth, '00', 2, (value) => ('0' + value).substring(value.length - 1));
 onTyping(date_2, cardYear, '00', 2, (value) => ('0' + value).substring(value.length - 1));
+onTyping(cvc, cardCvc, '000', 3, identity);
 
 function onTyping(input, target, defaultValue, maxLength, formatter) {
   input.addEventListener('keydown', (event) => {
@@ -48,13 +57,17 @@ form.addEventListener("submit", e => {
   e.preventDefault();
 
   if (!validateInputs()) {
-    document.getElementById('form').innerHTML = "<div class='thanks'><svg width='80' height='80' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='40' cy='40' r='40' fill='url(#a)'/><path d='M28 39.92 36.08 48l16-16' stroke='#fff' stroke-width='3'/><defs><linearGradient id='a' x1='-23.014' y1='11.507' x2='0' y2='91.507' gradientUnits='userSpaceOnUse'><stop stop-color='#6348FE'/><stop offset='1' stop-color='#610595'/></linearGradient></defs></svg><h1>Thank you!</h1> <p> We've added your card details </p> <button> Continue </button></div>";
+    document.getElementById('container').classList.toggle('hidden');
+    document.getElementById('done').classList.toggle('hidden');
   }
-
 });
+
 const setError = (element, message) => {
-  const inputControl = element.parentElement;
-  const errorDisplay = inputControl.querySelector(".error");
+  element.classList.add('error');
+  element.classList.remove('success');
+
+  const inputControl = element.closest('.field');
+  const errorDisplay = inputControl.querySelector("div.error");
 
   if (errorDisplay) {
     errorDisplay.innerText = message;
@@ -62,24 +75,28 @@ const setError = (element, message) => {
 
   inputControl.classList.add('error');
   inputControl.classList.remove("success")
-
 }
-const setSuccess = element => {
-  const inputControl = element.parentElement;
-  const errorDisplay = inputControl.querySelector(".error");
+const setSuccess = (element, valid = true) => {
+  element.classList.add('success');
+  element.classList.remove('error');
 
-  if (errorDisplay) {
-    errorDisplay.innerText = "";
+  if (valid) {
+    const inputControl = element.closest('.field');
+    const errorDisplay = inputControl.querySelector("div.error");
+
+    if (errorDisplay) {
+      errorDisplay.innerHTML = "\&nbsp;";
+    }
+
+    inputControl.classList.remove('error');
+    inputControl.classList.add('success')
   }
-
-  inputControl.classList.remove('error');
-  inputControl.classList.add('success')
-
 }
 const validateInputs = () => {
   let hasError = false;
   const nameValue = name.value.trim();
   const numberValue = number.value.trim();
+
   const date_1Value = date_1.value.trim();
   const date_2Value = date_2.value.trim();
   const cvcValue = cvc.value.trim();
@@ -108,33 +125,28 @@ const validateInputs = () => {
     number[i] += " ";
   }
 
-  if (date_1Value === "") {
+  const isDateValid = date_1Value.match(/^(0?[1-9]{1}|10|11|12)$/);
+  if (!isDateValid) {
+    // setError(date_1, "Date is required");
     setError(date_1, "Date is required");
     hasError = true;
   } else {
     setSuccess(date_1);
   }
 
-  if (date_2Value === "") {
+  if (!date_2Value.match(/^[0-9]{2}$/)) {
+    // setError(date_2, "Date is required");
     setError(date_2, "Date is required");
     hasError = true;
-  } else if (date_2Value.length > 4 || date_2Value.length < 0) {
-    setError(date_2, "Wrong date");
   } else {
-    setSuccess(date_2);
+    // if (isDateValid) {
+    setSuccess(date_2, isDateValid);
+    // }
   }
 
-  if (date_1Value <= 12 || date_2Value === "") {
-    setError(date_2, "Can't be blank");
-  } else {
-    setSuccess(date_1, date_2);
-  }
-
-  if (cvcValue === "") {
+  if (!cvcValue.match(/^[0-9]{3}$/)) {
     setError(cvc, "CVC is required");
     hasError = true;
-  } else if (cvcValue.length !== 3) {
-    setError(cvc, "Wrong CVC");
   } else {
     setSuccess(cvc);
   }

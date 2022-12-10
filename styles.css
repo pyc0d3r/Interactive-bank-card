@@ -2,8 +2,16 @@
   margin: 0;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 20px;
+  box-sizing: border-box;
 }
 
+html {
+  box-sizing: border-box;
+}
+
+.layout .hidden {
+  display: none;
+}
 
 em {
   font-size: 0.7rem;
@@ -33,15 +41,15 @@ em {
 }
 
 .code svg {
-  padding-block: 30%;
-  padding-inline: 10%;
+  padding-block: 25%;
+  padding-inline: 5%;
+  width: 100%;
 }
 
 #information,
 .code p {
   list-style: none;
   display: flex;
- 
   margin-block: 5%;
   padding-inline: 5%;
   color: hsl(0, 0%, 100%);
@@ -49,19 +57,20 @@ em {
   width: 100%;
 
 }
+
 #information li {
   justify-content: center;
 }
 
 .code p {
-  letter-spacing: 0.45rem;
+  letter-spacing: 0.4rem;
   width: 120%;
   word-break: keep-all;
 }
 
 li {
   font-size: 0.7rem;
-  letter-spacing: 0.3rem;
+  letter-spacing: 0.2rem;
 }
 
 .code {
@@ -109,15 +118,20 @@ form {
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-inline: 6%;
-  margin-left: 20%;
   align-content: center;
   justify-items: center;
+  margin-left: 8%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 label {
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
   color: hsl(278, 68%, 11%);
   font-size: 0.9rem;
 }
@@ -139,8 +153,16 @@ input {
   margin: 0;
   padding-bottom: 5%;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 30%;
+  opacity: 80%;
 }
 
+#card_name,
+#card_number {
+  min-width: max-content;
+}
 
 input:focus {
   outline: none;
@@ -151,13 +173,14 @@ input {
   color: hsl(278, 68%, 11%);
   border-width: 2px;
   text-overflow: ellipsis;
+  opacity: 70%;
 }
 
 #exp {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
+  gap: 0.5rem;
 }
 
 #numy {
@@ -165,21 +188,23 @@ input {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.cvc #numy {
+  display: block;
 }
 
 .field {
-  display: flex;
   flex-direction: column;
-  margin-top: 1.5rem;
   width: 100%;
-
   justify-content: center;
+
 }
 
 .cvc {
-  display: flex;
   flex-direction: column;
-  width: 50%;
 }
 
 .container {
@@ -189,6 +214,8 @@ input {
   margin-block: 0;
   display: inline-block;
   width: auto;
+  margin-left: 8%;
+  margin-right: 8%;
 
 }
 
@@ -206,7 +233,7 @@ button {
   height: 3rem;
   border: none;
   border-radius: 0.5rem;
-  margin-top: 40px;
+  margin-top: 20px;
   cursor: pointer;
   width: 100%;
 
@@ -243,16 +270,23 @@ button {
 }
 
 
-.success input {
+input.success {
   border-color: purple;
 }
 
-.error input {
+input.error {
   border-color: red;
 }
 
-.error {
+.thanks button {
+  max-width: 400px;
+}
+
+div.error {
   color: red;
+  /* font-size: 16px; */
+  /* margin-bottom: 1rem; */
+  /* display: inline-block; */
 }
 
 #card_cvc {
@@ -260,14 +294,15 @@ button {
   position: absolute;
   display: block;
   padding-right: 3rem;
-padding-bottom: 0.2rem;
+  padding-bottom: 0.2rem;
 }
+
 .card-back {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-width: 100%;
-margin-left: 5rem;
+  width: 100%;
+  margin-left: 5rem;
 }
 
 @media only screen and (max-width: 600px) {
@@ -283,6 +318,7 @@ margin-left: 5rem;
     padding: 0;
     outline: 0;
   }
+
   .card-back {
     margin-bottom: 0.8rem;
   }
@@ -304,6 +340,8 @@ margin-left: 5rem;
     margin: 0;
     display: block;
     min-width: 100%;
+    margin-bottom: 0 !important;
+    ;
   }
 
   .attribution {
@@ -315,34 +353,27 @@ margin-left: 5rem;
   }
 
   .card-front {
-    background-image: url(images/card-logo.png);
+    background-image: url(images/card-logo.svg);
     z-index: 100;
     height: 6.1rem;
     margin-right: 4rem;
   }
 
- 
+
 
   .layout {
     display: flex;
     flex-direction: column;
     gap: 0;
-    width:98%;
+    width: 100%;
   }
 
-  .container {
-    margin: 0;
-  }
 
   form {
-    display: flex;
     align-self: center;
-    margin: 0;
     padding: 0;
-  }
-
-  .field {
-    width: 500px;
+    height: 50%;
+    margin-inline: 0;
   }
 
   button {
@@ -353,6 +384,7 @@ margin-left: 5rem;
     margin: 0;
     padding-bottom: 5%;
     width: 100%;
+    gap: 150px;
   }
 
   .container {
@@ -365,7 +397,7 @@ margin-left: 5rem;
     align-items: center;
     gap: 30px;
   }
- 
+
   .thanks h1 {
     text-transform: uppercase;
     color: hsl(278, 68%, 11%);
@@ -385,7 +417,7 @@ margin-left: 5rem;
   }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 960px) {
   body {
     background-image: url(images/bg-main-mobile.png);
     background-repeat: no-repeat;
@@ -394,18 +426,19 @@ margin-left: 5rem;
     margin: 0;
     padding: 0;
   }
-  
+
   #information {
     margin: 0;
     padding-bottom: 5%;
     width: 90%;
-    gap: 5%;
+    gap: 30%;
   }
 
   .code svg {
     padding-block: 25%;
     padding-inline: 10%;
   }
+
   .card-back {
     margin-bottom: 0.8rem;
     width: 80%;
@@ -419,6 +452,7 @@ margin-left: 5rem;
     align-items: center;
     padding: 0;
     width: 90%;
+    margin-bottom: 12%;
   }
 
   .area #main {
@@ -426,7 +460,7 @@ margin-left: 5rem;
   }
 
   .card-front {
-    background-image: url(images/card-logo.png);
+    background-image: url(images/card-logo.svg);
     z-index: 100;
     height: 6.1rem;
   }
@@ -461,20 +495,14 @@ margin-left: 5rem;
     margin-top: 1.5rem;
     margin-bottom: 50px;
   }
-  
-  .container {
-    margin: 8%;
-  }
 
   form {
     display: flex;
     align-self: center;
-    margin-left: 0;
+    margin-top: 1%;
+    margin: 0;
   }
 
-  .field {
-    width: 500px;
-  }
 
   button {
     margin-bottom: 30px;
