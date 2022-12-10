@@ -441,7 +441,7 @@ div.error {
 
   .card-back {
     margin-bottom: 0.8rem;
-    width: 80%;
+    width: 73%;
   }
 
   .money {
@@ -463,6 +463,7 @@ div.error {
     background-image: url(images/card-logo.svg);
     z-index: 100;
     height: 6.1rem;
+    background: transparent;
   }
 
   .layout {
